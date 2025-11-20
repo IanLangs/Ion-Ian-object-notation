@@ -1,0 +1,5 @@
+"version":1.0
+"requeriments":
+    -"python":
+        -"version":"3.x"
+        -"ruamel.yaml"
