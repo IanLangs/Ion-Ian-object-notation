@@ -17,7 +17,7 @@ example.json (output)
 {"ion":{"syntax":[value:key","numbers (1,23,4.2)","str (\\"hello\\")","bool (true)","list [1, 2, 3, \\"four\\", false]","null"]}}
 """
 
-import sys, re, json, ruamel.yaml as yaml, os
+import sys, re, json, random, ruamel.yaml as yaml, os
 yml = yaml.YAML(typ="rt")
 def info():
     print("Ion - Ian Object Notation")
@@ -33,6 +33,14 @@ def version():
 def R_code():
     with open(sys.argv[1], "r") as f:
         code = f.read()
+    def maybe(m):
+        prob = random.uniform(0.0, 1.0)
+        if prob < 0.5:
+            return "false"
+        elif prob > 0.5:
+            return "true"
+        else:
+            return "null"
     def opbool(m):
         if m.group(1) == m.group(2):
             return f"{m.group(1)}"
@@ -47,6 +55,7 @@ def R_code():
     def calc(m):
         return str(eval(f"{m.group(1)} {m.group(2)} {m.group(3)}"))
     code = re.sub(r"(-?\d*\.?\d+)\s*([-+*/])\s*(-?\d*\.?\d+)", calc, code)
+    code = re.sub("maybe", maybe, code)
     code = re.sub(r"(true|false|null) \$ (true|false|null)", opbool, code)
     code = re.sub(r"\t|    ", "  ", code)
     return code
