@@ -100,6 +100,7 @@ fns = {
      "--info": info,
      "--version": version
  }
+
 if __name__ == "__main__":
     if not len(sys.argv) == 3:
         raise Exception("Invalid number of arguments")

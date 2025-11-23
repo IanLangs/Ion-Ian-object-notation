@@ -1,7 +1,7 @@
 "language":
     "name": "ian anotation language"
     "filetype": "*.ion"
-    "version": 1.0
+    "version": 1.1
     "requirements":
         - "signi": "No: reque"
             1: "python"
